@@ -101,7 +101,7 @@ uint8_t W5100Class::init(void)
 	delay(560);
 	//Serial.println("w5100 init");
 
-	#if defined(ETH_SCLK) && defined(ETH_MISO) && defined(ETH_MOSI) && defined(ETHERNET_CS_PIN)       //***********
+	#if defined(ETH_SCLK) && defined(ETH_MISO) && defined(ETH_MOSI) && defined(ETHERNET_CS_PIN)
 	spiETH.begin(ETH_SCLK, ETH_MISO, ETH_MOSI, ETHERNET_CS_PIN);
 	#else
 	spiETH.begin();
