@@ -37,7 +37,11 @@
     #elif defined(ETH_USE_FSPI)
       SPIClass spiETH = SPIClass(FSPI);
     #else // use FSPI port
-      SPIClass spiETH = SPI;
+        #ifdef ARDUINO_ARCH_SAMD
+          SPIClassSAMD spiETH = SPI;
+        #else
+          SPIClass spiETH = SPI;
+        #endif
     #endif
 #endif
 
@@ -48,10 +52,17 @@ DhcpClass* EthernetClass::_dhcp = NULL;
 ** Function name:           getSPIinstance
 ** Description:             Get the instance of the SPI class
 ***************************************************************************************/
-SPIClass& EthernetClass::getSPIinstance(void)
-{
-  return spiETH;
-} 
+#if defined(ARDUINO_ARCH_SAMD)
+  SPIClassSAMD& EthernetClass::getSPIinstance(void)
+  {
+    return spiETH;
+  }
+#else
+  SPIClass& EthernetClass::getSPIinstance(void)
+  {
+    return spiETH;
+  }
+#endif
 
 int EthernetClass::begin(uint8_t *mac, unsigned long timeout, unsigned long responseTimeout)
 {

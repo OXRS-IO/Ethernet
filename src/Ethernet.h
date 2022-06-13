@@ -111,7 +111,11 @@ public:
 	friend class EthernetUDP;
 
 	// Get SPI class handle
-	static   SPIClass& getSPIinstance(void);
+#ifdef ARDUINO_ARCH_SAMD
+	static   SPIClassSAMD& getSPIinstance(void); // Get SPI class handle
+#else
+	static   SPIClass& getSPIinstance(void); // Get SPI class handle
+#endif
 
 private:
 	// Opens a socket(TCP or UDP or IP_RAW mode)

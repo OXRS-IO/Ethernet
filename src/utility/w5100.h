@@ -17,7 +17,11 @@
 #include <Arduino.h>
 #include <SPI.h>
 
-extern SPIClass spiETH;
+#ifdef ARDUINO_ARCH_SAMD
+  extern SPIClassSAMD spiETH;
+#else
+  extern SPIClass spiETH;
+#endif
 
 // Safe for all chips
 #define SPI_ETHERNET_SETTINGS SPISettings(14000000, MSBFIRST, SPI_MODE0)
