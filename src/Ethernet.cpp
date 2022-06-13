@@ -37,7 +37,7 @@
     #elif defined(ETH_USE_FSPI)
       SPIClass spiETH = SPIClass(FSPI);
     #else // use FSPI port
-      SPIClass& spiETH = SPI;
+      SPIClass spiETH = SPI;
     #endif
 #endif
 
